@@ -1,0 +1,7 @@
+variables:
+  apk_suffix: 'Philadelphia'
+  activeProducts: 'philadelphia'
+  activeDestinations: 'external'
+  activeEnvironments: 'production'
+  activeBackends: 'platformsapi'
+  activeDeployments: 'installed'

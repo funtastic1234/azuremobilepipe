@@ -5,38 +5,21 @@
 name: $(Date:yyyyMMdd)$(Rev:rr)
 
 trigger:
-  - master
+  - develop
 
 jobs:
-  - job: A
+  - job: Philadelphia
     pool:
       vmImage: 'macos-latest'
     variables:
-      - group: "A"
-      - template: "azure_vars/A_vars.yml"
+      - group: "Philadelphia"
+      - template: "azure_vars/Philadelphia_vars.yml"
     steps:
       - template: install_emulator.yml
+      # NOTE: NEED A STEP TO RUN WIREMOCK. It is now included as a submodule can ./runWiremock.sh can be invoked as a bash step
       - template: build-template.yml
         parameters:
           unit_tests: false
-          gradle_task: "connectedRedStagingProductADebugAndroidTest"
-      - template: build-template.yml
-      - template: publish_apks.yml
-  - job: B
-    pool:
-      vmImage: 'macos-latest'
-    variables:
-      - group: "B"
-      - template: "azure_vars/B_vars.yml"
-    steps:
-      - template: build-template.yml
-      - template: publish_apks.yml
-  - job: C
-    pool:
-      vmImage: 'macos-latest'
-    variables:
-      - group: "C"
-      - template: "azure_vars/C_vars.yml"
-    steps:
+          gradle_task: "connectedMockPhiladelphiaPlatformsapiGoogleExternalInstalledDebug"
       - template: build-template.yml
       - template: publish_apks.yml
